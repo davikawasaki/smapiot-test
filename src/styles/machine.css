@@ -1,0 +1,14 @@
+.mouter {
+    padding: 1em 2em;
+    color: #00009a;
+}
+
+.mouter a {
+    color: #00009a;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.mouter a:hover {
+    text-decoration: underline;
+}
