@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import '../styles/machine.css';
 import { MachineStreamApi } from "../services/APIService";
-import { isUndefined } from "util";
+import { isUndefined, isNullOrUndefined } from "util";
 import { modifyOriginalMachineWrapper } from "../services/DataService";
-import { MachineWrapper, Event } from "../models/MachineModel";
+import { MachineWrapper, Event, Machine } from "../models/MachineModel";
 import { Link } from "react-router-dom";
 
 type RouterParamsObject = {
@@ -26,6 +26,24 @@ const MachineInfo: React.FC = () => {
                 })
                 .catch(err => console.error(err));
         }
+
+        // To be changed using global context
+        setInterval(()=> { 
+            console.log("Updating machine info...");
+            const liveEvent = localStorage.getItem('liveEvent');
+            if (!isNullOrUndefined(liveEvent)) {
+                try {
+                    const parsedLiveEvent = JSON.parse(liveEvent);
+                    if (parsedLiveEvent.machine_id === machine.id) {
+                        machine.events.pop();
+                        machine.events.push(
+                            new Event(parsedLiveEvent.timestamp, parsedLiveEvent.status)
+                        )
+                        setMachine(machine);
+                    }
+                } catch (error) {}
+            }
+        }, 30 * 1000);
     }, [machine, api, machineParams]);
 
     return (

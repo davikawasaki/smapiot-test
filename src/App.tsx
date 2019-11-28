@@ -9,13 +9,23 @@ import { MachineStreamApi } from './services/APIService';
 import GoogleMapsApiKeyEnv from './ConfigConstants'
 import { toCustomMachine, modifyOriginalMachines, toMarkers } from './services/DataService';
 import MachineInfo from './components/MachineInfo';
+import { MachineStreamWs } from './services/WebSocketService';
 
 const App: React.FC = () => {
   let [customMachines, setCustomMachines] = useState(Array<CustomMachine>());
   let [markers, setMarkers] = useState(Array<MapMarkerWrapper>());
   let [centerMarker, setCenterMarker] = useState(defCenter);
   let [zoom, setZoom] = useState(1);
+
+
+  // ws.onopen = () => ws.send('["1", "1", "events", "phx_join", {}]');
+  // // ws.send('[null, "1", "phoenix", "heartbeat", {}]');
+  // ws.onmessage = (ev) => console.log(JSON.parse(ev.data));
     
+  const ws = new MachineStreamWs();
+  ws.connect();
+  ws.getEvents();
+
   const api = new MachineStreamApi();
 
   useEffect(() => {

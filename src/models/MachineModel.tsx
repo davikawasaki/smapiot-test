@@ -1,5 +1,19 @@
 export const defMachineValue: string = "Unknown Machine";
 
+export class LiveEvent {
+    id: string
+    machine_id: string
+    status: string
+    timestamp: string
+
+    constructor(id: string, machine_id: string, status: string, timestamp: string) {
+        this.id = id;
+        this.machine_id = machine_id;
+        this.status = status;
+        this.timestamp = timestamp;
+    }
+}
+
 export class Event {
     timestamp: string
     status: string
