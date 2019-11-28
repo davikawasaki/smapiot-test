@@ -1,6 +1,6 @@
 const GoogleMapsApiKeyEnv = {
     dev: '',
-    prod: 'AIzaSyD7LUASK8GZA5ub9NRfinR4wrWrX4B5wlI'
+    prod: ''
 }
 
 export default GoogleMapsApiKeyEnv;

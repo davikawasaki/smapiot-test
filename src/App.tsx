@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ViewMap from './components/ViewMap';
 import Sidebar from './components/Sidebar';
-import './data/test.json';
 import { CustomMachine } from './models/MachineModel';
 import { MapMarkerWrapper, MapMarker } from './models/ViewModel';
 import { GoogleMapsConfig, defZoom, defCenter } from './models/ConfigModel';
